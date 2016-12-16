@@ -1,0 +1,46 @@
+{
+  "name": "papyrus",
+  "productName": "Papyrus",
+  "version": "0.1.0",
+  "description": "Unofficial Dropbox Paper app",
+  "main": "main.js",
+  "license": "MIT",
+  "repository": "morkro/papyrus",
+  "bugs": {
+    "url": "https://github.com/morkro/papyrus/issues"
+  },
+  "author": {
+    "name": "Moritz Kröger",
+    "email": "write@morkro.de",
+    "url": "www.moritz.berlin"
+  },
+  "keywords": [
+    "dropbox",
+    "paper",
+    "papyrus",
+    "electron",
+    "notes",
+    "app"
+  ],
+  "scripts": {
+    "lint": "eslint -f tap main.js",
+    "start": "electron .",
+    "build": "npm run build:mac && npm run build:linux && npm run build:windows",
+    "build:mac": "electron-packager . <mac settings incoming>",
+    "build:linux": "electron-packager . <linux settings incoming>",
+    "build:windows": "electron-packager . <windows settings incoming>",
+  },
+  "devDependencies": {
+    "electron": "^1.4.12",
+    "electron-debug": "^1.1.0",
+    "electron-packager": "^8.4.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
+  },
+  "dependencies": {
+    "electron-config": "^0.2.1"
+  }
+}
