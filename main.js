@@ -1,3 +1,4 @@
+const path = require('path')
 const { app, BrowserWindow } = require('electron') // eslint-disable-line
 const electronDebug = require('electron-debug') // eslint-disable-line
 const config = require('./config')
@@ -6,6 +7,7 @@ const config = require('./config')
 electronDebug()
 
 let mainWindow = null
+const { platform } = process
 const appIsRunning = app.makeSingleInstance(() => {
 	if (mainWindow) {
 		if (mainWindow.isMinimized()) {
@@ -25,27 +27,26 @@ if (appIsRunning) {
  * @return {BrowserWindow}
  */
 function createMainWindow () {
-	const { height, width, paperURL } = config.store
+	const windowConfig = config.get('window')
+	const { paperURL } = config.store
 	const window = new BrowserWindow({
 		title: app.getName(),
-		width,
-		height,
-		minWidth: 400,
-		minHeight: 200,
+		width: windowConfig.width,
+		height: windowConfig.height,
+		minWidth: 875,
+		minHeight: 400,
 		center: true,
 		titleBarStyle: 'hidden',
-		autoHideMenuBar: true
+		autoHideMenuBar: true,
+		icon: platform === 'linux' && path.join(__dirname, 'static/dropbox-osx.png'),
+		show: false
 	})
 
 	window.loadURL(paperURL)
 
 	window.on('close', () => {
-		if (process.platform === 'darwin') {
-			app.hide()
-		}
-		else {
-			window.hide()
-		}
+		if (platform === 'darwin') app.hide()
+		else window.hide()
 	})
 
 	return window
@@ -54,6 +55,9 @@ function createMainWindow () {
 // Create instance once Electron is ready
 app.on('ready', () => {
 	mainWindow = createMainWindow()
+	mainWindow.webContents.on('dom-ready', () => {
+		mainWindow.show()
+	})
 })
 
 // Show browser instance

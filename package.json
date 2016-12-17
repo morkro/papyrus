@@ -25,14 +25,10 @@
   "scripts": {
     "lint": "eslint -f tap main.js",
     "start": "electron .",
-    "build": "npm run build:mac && npm run build:linux && npm run build:windows",
-    "build:mac": "electron-packager . <mac settings incoming>",
-    "build:linux": "electron-packager . <linux settings incoming>",
-    "build:windows": "electron-packager . <windows settings incoming>",
+    "build": "electron-packager . --all --overwrite --out=dist"
   },
   "devDependencies": {
     "electron": "^1.4.12",
-    "electron-debug": "^1.1.0",
     "electron-packager": "^8.4.0",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
@@ -41,6 +37,7 @@
     "tape": "^4.6.3"
   },
   "dependencies": {
-    "electron-config": "^0.2.1"
+    "electron-config": "^0.2.1",
+    "electron-debug": "^1.1.0"
   }
 }
