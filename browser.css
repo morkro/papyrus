@@ -1,0 +1,21 @@
+/* Create invisible draggable area */
+body.papyrus-drag::after {
+	content: "";
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 20px;
+	background: transparent;
+	z-index: 100;
+	-webkit-app-region: drag;
+}
+
+.home-button {
+	cursor: default !important;
+}
+
+/* Remove back button */
+.home-button .icon-wrapper-back-arrow {
+	display: none !important;
+}

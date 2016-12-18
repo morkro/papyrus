@@ -1,12 +1,21 @@
 const path = require('path')
-const { app, BrowserWindow } = require('electron') // eslint-disable-line
-const electronDebug = require('electron-debug') // eslint-disable-line
+const fs = require('fs')
+const electronDebug = require('electron-debug')
 const config = require('./config')
+const {
+	app,
+	BrowserWindow,
+	Menu,
+	Tray,
+	nativeImage,
+	shell
+} = require('electron') // eslint-disable-line
 
 // Enable easy debugging
 electronDebug()
 
 let mainWindow = null
+let tray = null
 const { platform } = process
 const appIsRunning = app.makeSingleInstance(() => {
 	if (mainWindow) {
@@ -20,6 +29,38 @@ const appIsRunning = app.makeSingleInstance(() => {
 // Ensure only one instance is running
 if (appIsRunning) {
 	app.quit()
+}
+
+/**
+ * Toggles window visibility.
+ * @return {undefined}
+ */
+function toggleWindow () {
+	if (mainWindow.isVisible()) mainWindow.hide()
+	else mainWindow.show()
+}
+
+/**
+ * Creates a tray icon and adds a context menu to it.
+ * @return {undefined}
+ */
+function createTray () {
+	const native = nativeImage.createFromPath(path.join(__dirname, config.get('icons.tray')))
+	const contextMenu = Menu.buildFromTemplate([
+		{
+			label: 'Toggle',
+			click () {
+				toggleWindow()
+			}
+		},
+		{ type: 'separator' },
+		{ role: 'quit' }
+	])
+
+	tray = new Tray(native)
+	tray.setToolTip(app.getName())
+	tray.setContextMenu(contextMenu)
+	tray.on('click', toggleWindow)
 }
 
 /**
@@ -38,8 +79,11 @@ function createMainWindow () {
 		center: true,
 		titleBarStyle: 'hidden',
 		autoHideMenuBar: true,
-		icon: platform === 'linux' && path.join(__dirname, 'static/dropbox-osx.png'),
-		show: false
+		// icon: path.join(__dirname, config.get('icons.osx')),
+		show: false,
+		webPreferences: {
+			preload: path.join(__dirname, 'browser.js')
+		}
 	})
 
 	window.loadURL(paperURL)
@@ -55,8 +99,18 @@ function createMainWindow () {
 // Create instance once Electron is ready
 app.on('ready', () => {
 	mainWindow = createMainWindow()
-	mainWindow.webContents.on('dom-ready', () => {
+	createTray()
+
+	const pageWindow = mainWindow.webContents
+
+	pageWindow.on('dom-ready', () => {
 		mainWindow.show()
+		pageWindow.insertCSS(fs.readFileSync(path.join(__dirname, 'browser.css'), 'utf8'))
+	})
+
+	pageWindow.on('new-window', (event, url) => {
+		event.preventDefault()
+		shell.openExternal(url)
 	})
 })
 
