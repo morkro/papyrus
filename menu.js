@@ -43,6 +43,8 @@ const menu = {
 		label: app.getName(),
 		submenu: [
 			{ role: 'about' },
+			{ label: `Version ${app.getVersion()}`, enabled: false },
+			{ label: 'Check for Update' },
 			{ type: 'separator' },
 			{
 				label: 'Preferences...',
@@ -50,6 +52,11 @@ const menu = {
 				click () {
 					sendToWebContent('show-preferences')
 				}
+			},
+			{ type: 'separator' },
+			{
+				role: 'services',
+				submenu: []
 			},
 			{ type: 'separator' },
 			{ role: 'hide' },
