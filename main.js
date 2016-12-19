@@ -1,21 +1,16 @@
+// eslint-disable-next-line
+const { app, BrowserWindow, Menu, nativeImage, shell } = require('electron')
+const electronDebug = require('electron-debug')
 const path = require('path')
 const fs = require('fs')
-const electronDebug = require('electron-debug')
 const config = require('./config')
-const {
-	app,
-	BrowserWindow,
-	Menu,
-	Tray,
-	nativeImage,
-	shell
-} = require('electron') // eslint-disable-line
+const tray = require('./tray')
+const menu = require('./menu')
 
 // Enable easy debugging
 electronDebug()
 
 let mainWindow = null
-let tray = null
 const { platform } = process
 const appIsRunning = app.makeSingleInstance(() => {
 	if (mainWindow) {
@@ -38,29 +33,6 @@ if (appIsRunning) {
 function toggleWindow () {
 	if (mainWindow.isVisible()) mainWindow.hide()
 	else mainWindow.show()
-}
-
-/**
- * Creates a tray icon and adds a context menu to it.
- * @return {undefined}
- */
-function createTray () {
-	const native = nativeImage.createFromPath(path.join(__dirname, config.get('icons.tray')))
-	const contextMenu = Menu.buildFromTemplate([
-		{
-			label: 'Toggle',
-			click () {
-				toggleWindow()
-			}
-		},
-		{ type: 'separator' },
-		{ role: 'quit' }
-	])
-
-	tray = new Tray(native)
-	tray.setToolTip(app.getName())
-	tray.setContextMenu(contextMenu)
-	tray.on('click', toggleWindow)
 }
 
 /**
@@ -99,7 +71,8 @@ function createMainWindow () {
 // Create instance once Electron is ready
 app.on('ready', () => {
 	mainWindow = createMainWindow()
-	createTray()
+	tray.create({ onToggle: toggleWindow, onClick: toggleWindow })
+	Menu.setApplicationMenu(menu)
 
 	const pageWindow = mainWindow.webContents
 
