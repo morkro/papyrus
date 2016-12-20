@@ -49,9 +49,9 @@ function createMainWindow () {
 		minWidth: 875,
 		minHeight: 400,
 		center: true,
-		titleBarStyle: 'hidden',
+		titleBarStyle: 'hidden-inset',
 		autoHideMenuBar: true,
-		// icon: path.join(__dirname, config.get('icons.osx')),
+		icon: platform === 'linux' && path.join(__dirname, config.get('icons.osx')),
 		show: false,
 		webPreferences: {
 			preload: path.join(__dirname, 'browser.js')

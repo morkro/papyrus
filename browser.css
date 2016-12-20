@@ -11,6 +11,15 @@ body.papyrus-drag::after {
 	-webkit-app-region: drag;
 }
 
+/* Move Paper title because of Mac controls */
+body.papyrus-better-title .header-pad-title-and-folder {
+	left: 105px;
+}
+
+body.papyrus-better-title .hp-header-back-button-wrapper {
+	left: 65px !important;
+}
+
 .home-button {
 	cursor: default !important;
 }
@@ -18,4 +27,9 @@ body.papyrus-drag::after {
 /* Remove back button */
 .home-button .icon-wrapper-back-arrow {
 	display: none !important;
+}
+
+/* Move button so it doesn't touch the scrollbar */
+#hp-editor-assist-buttons {
+	transform: translateX(-16px);
 }

@@ -12,8 +12,8 @@ ipcRenderer.on('show-preferences', () => {
 		document.querySelector('.hp-sidebar-user').click()
 		setTimeout(() => {
 			document.querySelector('.hp-button-account-settings-wrapper button').click()
+			document.querySelector('.hp-sidebar-user').click()
 		}, 10)
-		document.querySelector('.hp-sidebar-user').click()
 	}
 	else {
 		document.querySelector('.hp-button-account-settings-wrapper button').click()
@@ -46,7 +46,7 @@ ipcRenderer.on('new-folder', () => {
 
 function init () {
 	if (os.platform() === 'darwin') {
-		document.body.classList.add('papyrus-drag')
+		document.body.classList.add('papyrus-drag', 'papyrus-better-title')
 	}
 
 	document
