@@ -44,13 +44,19 @@ const menu = {
 		submenu: [
 			{ role: 'about' },
 			{ label: `Version ${app.getVersion()}`, enabled: false },
-			{ label: 'Check for Update' },
 			{ type: 'separator' },
 			{
 				label: 'Preferences...',
 				accelerator: 'Cmd+,',
 				click () {
 					sendToWebContent('show-preferences')
+				}
+			},
+			{ type: 'separator' },
+			{
+				label: 'Log Out',
+				click () {
+					sendToWebContent('log-out')
 				}
 			},
 			{ type: 'separator' },
@@ -81,6 +87,7 @@ const menu = {
 					sendToWebContent('meeting-document')
 				}
 			},
+			{ type: 'separator' },
 			{
 				label: 'Create new folder',
 				accelerator: 'Cmd+T',
@@ -110,7 +117,6 @@ const menu = {
 		submenu: [
 			{ role: 'reload' },
 			{ role: 'toggledevtools' },
-			{ role: 'togglefullscreen' },
 			{ type: 'separator' },
 			{ role: 'resetzoom' },
 			{ role: 'zoomin' },
@@ -121,7 +127,9 @@ const menu = {
 		label: 'Window',
 		submenu: [
 			{ role: 'minimize' },
+			{ role: 'close' },
 			{ type: 'separator' },
+			{ role: 'togglefullscreen' },
 			{ role: 'front' }
 		]
 	},
@@ -159,7 +167,6 @@ const menu = {
 
 if (platform === 'darwin') {
 	template.push(menu[app.getName()])
-	menu.window.submenu.splice(1, 0, { role: 'zoom' })
 }
 else {
 	menu.view.submenu.push(

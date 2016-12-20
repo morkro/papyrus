@@ -2,18 +2,40 @@
 const { ipcRenderer } = require('electron')
 const os = require('os')
 
-ipcRenderer.on('show-preferences', () => {
-	const $menuWrapper = document.querySelector('hp-dropdown-menu-wrapper')
+function checkForMenuLoaded () {
+	return !!document.querySelector('hp-dropdown-menu-wrapper')
+}
+/**
+ * Ugly helper function to force a menu render.
+ * @todo Find smarter solution.
+ * @param  {Function} cb
+ * @return {undefined}
+ */
+function forceMenuInit (cb) {
+	const $sidebar = document.querySelector('.hp-sidebar-user')
+	$sidebar.click()
+	setTimeout(() => {
+		cb()
+		$sidebar.click()
+	}, 10)
+}
 
-	// The button is dynamically added by React when the user icon is clicked
-	// for the first time. Therefore I have to force this to happen.
-	// Not a good solution though. Need to find a better one.
-	if (!$menuWrapper) {
-		document.querySelector('.hp-sidebar-user').click()
-		setTimeout(() => {
+ipcRenderer.on('log-out', () => {
+	if (!checkForMenuLoaded()) {
+		forceMenuInit(() => {
+			document.querySelector('.hp-menu ul[role="menu"] li:last-child button').click()
+		})
+	}
+	else {
+		document.querySelector('.hp-menu ul[role="menu"] li:last-child button').click()
+	}
+})
+
+ipcRenderer.on('show-preferences', () => {
+	if (!checkForMenuLoaded()) {
+		forceMenuInit(() => {
 			document.querySelector('.hp-button-account-settings-wrapper button').click()
-			document.querySelector('.hp-sidebar-user').click()
-		}, 10)
+		})
 	}
 	else {
 		document.querySelector('.hp-button-account-settings-wrapper button').click()

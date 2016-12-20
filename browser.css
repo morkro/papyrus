@@ -30,6 +30,7 @@ body.papyrus-better-title .hp-header-back-button-wrapper {
 }
 
 /* Move button so it doesn't touch the scrollbar */
+#hp-page-editor footer .hp-versions-button,
 #hp-editor-assist-buttons {
 	transform: translateX(-16px);
 }

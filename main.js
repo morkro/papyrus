@@ -60,7 +60,8 @@ function createMainWindow () {
 
 	window.loadURL(paperURL)
 
-	window.on('close', () => {
+	window.on('close', (event) => {
+		event.preventDefault()
 		if (platform === 'darwin') app.hide()
 		else window.hide()
 	})
