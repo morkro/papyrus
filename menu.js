@@ -76,6 +76,12 @@ const menu = {
 				}
 			},
 			{
+				label: 'Create meeting document',
+				click () {
+					sendToWebContent('meeting-document')
+				}
+			},
+			{
 				label: 'Create new folder',
 				accelerator: 'Cmd+T',
 				click () {
@@ -103,6 +109,7 @@ const menu = {
 		label: 'View',
 		submenu: [
 			{ role: 'reload' },
+			{ role: 'toggledevtools' },
 			{ role: 'togglefullscreen' },
 			{ type: 'separator' },
 			{ role: 'resetzoom' },
