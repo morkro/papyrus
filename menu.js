@@ -94,6 +94,14 @@ const menu = {
 				click () {
 					sendToWebContent('new-folder')
 				}
+			},
+			{ type: 'separator' },
+			{
+				label: 'Download document',
+				accelerator: 'Cmd+D',
+				click () {
+					sendToWebContent('download-document')
+				}
 			}
 		]
 	},

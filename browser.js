@@ -2,6 +2,10 @@
 const { ipcRenderer } = require('electron')
 const os = require('os')
 
+/**
+ * Checks if the dynamic user menu has been loaded already.
+ * @return {Boolean}
+ */
 function checkForMenuLoaded () {
 	return !!document.querySelector('hp-dropdown-menu-wrapper')
 }
@@ -45,12 +49,16 @@ ipcRenderer.on('show-preferences', () => {
 ipcRenderer.on('new-document', () => {
 	const $docsWrapper = document.querySelector('.hp-pad-list-page')
 	const $folderWrapper = document.querySelector('.hp-folder-list-page')
+	const $editorPage = document.querySelector('#hp-page-editor')
 
 	if ($docsWrapper) {
 		$docsWrapper.querySelector('.hp-actions-menu-primary-button').click()
 	}
 	else if ($folderWrapper) {
 		$folderWrapper.querySelector('.hp-actions-menu-tertiary-button').click()
+	}
+	else if ($editorPage) {
+		$editorPage.querySelector('.hp-create-pad-button').click()
 	}
 })
 
@@ -66,13 +74,17 @@ ipcRenderer.on('new-folder', () => {
 	$folderWrapper.querySelector('.hp-actions-menu-primary-button').click()
 })
 
+ipcRenderer.on('download-document', () => {
+	document.querySelector('.hp-dropdown-menu-wrapper button[data-track-title="export-single"]')
+		.click()
+})
+
 function init () {
 	if (os.platform() === 'darwin') {
 		document.body.classList.add('papyrus-drag', 'papyrus-better-title')
 	}
 
-	document
-		.querySelector('a.home-button')
+	document.querySelector('a.home-button')
 		.addEventListener('click', event => event.preventDefault())
 }
 

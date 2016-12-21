@@ -10,6 +10,7 @@ const menu = require('./menu')
 // Enable easy debugging
 electronDebug()
 
+let quitApplication = false
 let mainWindow = null
 const { platform } = process
 const appIsRunning = app.makeSingleInstance(() => {
@@ -61,9 +62,11 @@ function createMainWindow () {
 	window.loadURL(paperURL)
 
 	window.on('close', (event) => {
-		event.preventDefault()
-		if (platform === 'darwin') app.hide()
-		else window.hide()
+		if (!quitApplication) {
+			event.preventDefault()
+			if (platform === 'darwin') app.hide()
+			else window.hide()
+		}
 	})
 
 	return window
@@ -95,6 +98,7 @@ app.on('activate', () => {
 
 // Store user settings before application has been quit
 app.on('before-quit', () => {
+	quitApplication = true
 	if (!mainWindow.isFullScreen()) {
 		config.set('window', mainWindow.getBounds())
 	}
