@@ -1,7 +1,7 @@
 # Papyrus 📑
 Unofficial Electron-based wrapper for Dropbox Paper as desktop application.
 
-![](media/papyris-preview.png)
+![](media/papyrus-preview.png)
 
 ## Installation
 [Download](https://github.com/morkro/papyrus/releases/latest), unzip, and install the application to any location.
