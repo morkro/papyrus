@@ -26,9 +26,9 @@
     "lint": "eslint -f tap main.js",
     "start": "electron .",
     "build": "npm run build:macos && npm run build:linux && npm run build:windows",
-    "build:macos": "electron-packager . --overwrite --asar --prune --ignore='^media$' --out=dist --platform=darwin --arch=x64 --icon=static/dropbox-osx.icns",
-    "build:linux": "electron-packager . --overwrite --prune --ignore='^media$' --out=dist --platform=linux --arch=x64",
-    "build:windows": "electron-packager . --overwrite --asar --ignore='^media$' --out=dist --prune --platform=win32 --arch=ia32 --icon=static/dropbox-windows.ico --version-string.ProductName=$npm_package_productName"
+    "build:macos": "electron-packager . --overwrite --asar --prune --ignore='^media$' --out=dist --platform=darwin --arch=x64 --icon=static/dropbox-osx.icns && cd dist/Papyrus-darwin-x64 && zip -ryXq9 ../Papyrus-osx-${npm_package_version}.zip Papyrus.app",
+    "build:linux": "electron-packager . --overwrite --prune --ignore='^media$' --out=dist --platform=linux --arch=x64 && cd dist/Papyrus-linux-x64/ && zip -ryq9 ../Papyrus-linux-${npm_package_version}.zip *",
+    "build:windows": "electron-packager . --overwrite --asar --ignore='^media$' --out=dist --prune --platform=win32 --arch=ia32 --icon=static/dropbox-windows.ico --version-string.ProductName=$npm_package_productName && cd dist/Papyrus-win32-ia32 && zip -ryq9 ../Papyrus-windows-${npm_package_version}.zip *"
   },
   "devDependencies": {
     "electron": "^1.4.12",
