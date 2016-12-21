@@ -1,4 +1,4 @@
-# Papyrus
+# Papyrus 📑
 Unofficial Electron-based wrapper for Dropbox Paper as desktop application.
 
 ![](media/papyris-preview.png)
@@ -34,6 +34,10 @@ The application wraps the official Dropbox Paper website in an [Electron](https:
 | `npm run build:windows` | Builds the Windows application |
 | `npm run build:linux` | Builds the Linux application |
 
-### Contribution 👪
+### Contribution
 
-Any sort of contribution is very welcome!
+Any form of contribution is very welcome!
+
+### License
+
+The code is available under [MIT License](LICENSE).
