@@ -182,7 +182,7 @@ else {
 		{ role: 'quit' }
 	)
 	// If not on macOS, add the about menu item to help.
-	menu.help.unshift(
+	menu.help.submenu.unshift(
 		menu.about,
 		{ type: 'separator' }
 	)

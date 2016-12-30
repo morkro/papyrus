@@ -52,9 +52,11 @@ function createMainWindow () {
 		center: true,
 		titleBarStyle: 'hidden-inset',
 		autoHideMenuBar: true,
+		backgroundColor: '#ffffff',
 		icon: platform === 'linux' && path.join(__dirname, config.get('icons.osx')),
 		show: false,
 		webPreferences: {
+			javascript: true,
 			preload: path.join(__dirname, 'browser.js')
 		}
 	})
