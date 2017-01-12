@@ -1,17 +1,18 @@
 # Papyrus 📑
-Unofficial Electron-based wrapper for Dropbox Paper as desktop application.
+Unofficial [Dropbox Paper](https://paper.dropbox.com) desktop application.
 
 ![](media/papyrus-preview.png)
+*Papyrus is currently at version `1.0.0`.*
 
 ## Installation
-[Download](https://github.com/morkro/papyrus/releases/latest), unzip, and install the application to any location.
+- [Download](https://github.com/morkro/papyrus/releases/latest) the installer
+- Unzip
+- Install the application to any location.
 
 #### macOS
-It's recommended to move the `Papyrus.app` file to the `Applications` directory.
+It's recommended to move the `Papyrus.app` file to the `Applications` directory. macOS will prompt you to **accept** that this runs from an **unidentified developer**.
 
-## Features
-
-### Shortcuts
+## Shortcuts
 
 | Description | Keybinding |
 | :--- | :--- |
