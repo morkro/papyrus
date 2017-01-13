@@ -5,6 +5,12 @@ Unofficial [Dropbox Paper](https://paper.dropbox.com) desktop application.
 *Papyrus is currently at version `1.0.0`.*
 
 ## Installation
+### Homebrew [Cask](http://caskroom.io/)
+```
+$ brew update && brew cask install morkro-papyrus
+```
+
+### Manually
 - [Download](https://github.com/morkro/papyrus/releases/latest) the installer
 - Unzip
 - Install the application to any location.
