@@ -1,6 +1,10 @@
-# Papyrus 📑
+# ![Papyrus](media/papyrus-logo.png)
+
+![devDependencies](https://david-dm.org/morkro/papyrus.svg)
+
 Unofficial [Dropbox Paper](https://paper.dropbox.com) desktop application.
 
+## Preview
 ![](media/papyrus-preview.png)
 *Papyrus is currently at version `1.0.0`.*
 
