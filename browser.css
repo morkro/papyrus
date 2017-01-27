@@ -34,3 +34,8 @@ body.papyrus-better-title .hp-header-back-button-wrapper {
 #hp-editor-assist-buttons {
 	transform: translateX(-16px);
 }
+
+/* Remove team settings button to avoid 404 error */
+#hp-page-pad-list > div.hp-list-page-header.hp-header.hp-list-page-controls > div > div.hp-list-page-controls-inner2 > div > div.hp-sidebar-account-dropdown.hp-account-with-settings.hp-dropdown.hp-dropdown-open > div.hp-dropdown-menu-wrapper > div > ul > li:nth-child(6) > a {
+	display: none;
+}
