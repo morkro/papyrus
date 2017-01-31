@@ -57,6 +57,10 @@ function createMainWindow () {
 		show: false,
 		webPreferences: {
 			javascript: true,
+			nodeIntegration: false,
+			webSecurity: false,
+			allowDisplayingInsecureContent: true,
+			allowRunningInsecureContent: true,
 			preload: path.join(__dirname, 'browser.js')
 		}
 	})

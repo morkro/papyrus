@@ -84,8 +84,11 @@ function init () {
 		document.body.classList.add('papyrus-drag', 'papyrus-better-title')
 	}
 
-	document.querySelector('a.home-button')
-		.addEventListener('click', event => event.preventDefault())
+	const $homeBtn = document.querySelector('a.home-button')
+
+	if ($homeBtn && $homeBtn !== null) {
+		$homeBtn.addEventListener('click', event => event.preventDefault())
+	}
 }
 
 document.addEventListener('DOMContentLoaded', init)
