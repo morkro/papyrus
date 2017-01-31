@@ -20,12 +20,12 @@ body.papyrus-better-title .hp-header-back-button-wrapper {
 	left: 65px !important;
 }
 
-.home-button {
+.maestro-nav__home-button {
 	cursor: default !important;
 }
 
 /* Remove back button */
-.home-button .icon-wrapper-back-arrow {
+.maestro-nav__home-button .maestro-nav__caret {
 	display: none !important;
 }
 

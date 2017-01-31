@@ -84,7 +84,7 @@ function init () {
 		document.body.classList.add('papyrus-drag', 'papyrus-better-title')
 	}
 
-	const $homeBtn = document.querySelector('a.home-button')
+	const $homeBtn = document.querySelector('a.maestro-nav__home-button')
 
 	if ($homeBtn && $homeBtn !== null) {
 		$homeBtn.addEventListener('click', event => event.preventDefault())
