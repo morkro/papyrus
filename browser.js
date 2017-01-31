@@ -81,7 +81,7 @@ ipcRenderer.on('download-document', () => {
 
 function init () {
 	if (os.platform() === 'darwin') {
-		document.body.classList.add('papyrus-drag', 'papyrus-better-title')
+		document.body.classList.add('papyrus-drag', 'papyrus-better-header')
 	}
 
 	const $homeBtn = document.querySelector('a.maestro-nav__home-button')

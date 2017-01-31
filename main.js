@@ -93,6 +93,12 @@ app.on('ready', () => {
 
 	pageWindow.on('new-window', (event, url) => {
 		event.preventDefault()
+
+		if (url.split('/').includes('present')) {
+			pageWindow.loadURL(url)
+			return
+		}
+
 		shell.openExternal(url)
 	})
 })
