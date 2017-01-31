@@ -6,7 +6,7 @@ Unofficial [Dropbox Paper](https://paper.dropbox.com) desktop application.
 
 ## Preview
 ![](media/papyrus-preview.png)
-*Papyrus is currently at version `1.0.0`.*
+*Papyrus is currently at version `1.0.2`.*
 
 ## Installation
 ### Homebrew [Cask](http://caskroom.io/)
