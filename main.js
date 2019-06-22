@@ -98,8 +98,6 @@ app.on('ready', () => {
 			pageWindow.loadURL(url)
 			return
 		}
-
-		shell.openExternal(url)
 	})
 })
 
