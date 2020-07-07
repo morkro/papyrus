@@ -31,7 +31,7 @@
     "build:windows": "electron-packager . --overwrite --asar --ignore='^media$' --out=dist --prune --platform=win32 --arch=ia32 --icon=static/dropbox-windows.ico --version-string.ProductName=$npm_package_productName && cd dist/Papyrus-win32-ia32 && zip -ryq9 ../Papyrus-windows-${npm_package_version}.zip *"
   },
   "devDependencies": {
-    "electron": "^1.4.12",
+    "electron": "^9.1.0",
     "electron-packager": "^12.0.2",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
