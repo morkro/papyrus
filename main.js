@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-const { app, BrowserWindow, Menu, nativeImage, shell } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const electronDebug = require('electron-debug')
 const path = require('path')
 const fs = require('fs')
@@ -13,25 +12,20 @@ electronDebug()
 let quitApplication = false
 let mainWindow = null
 const { platform } = process
-const appIsRunning = app.makeSingleInstance(() => {
-	if (mainWindow) {
-		if (mainWindow.isMinimized()) {
-			mainWindow.restore()
-		}
-		mainWindow.show()
-	}
-})
 
-// Ensure only one instance is running
-if (appIsRunning) {
-	app.quit()
+app.requestSingleInstanceLock()
+if (mainWindow) {
+	if (mainWindow.isMinimized()) {
+		mainWindow.restore()
+	}
+	mainWindow.show()
 }
 
 /**
  * Toggles window visibility.
  * @return {undefined}
  */
-function toggleWindow () {
+function toggleWindow() {
 	if (mainWindow.isVisible()) mainWindow.hide()
 	else mainWindow.show()
 }
@@ -40,7 +34,7 @@ function toggleWindow () {
  * Creates a main `BrowserWindow` instance
  * @return {BrowserWindow}
  */
-function createMainWindow () {
+function createMainWindow() {
 	const windowConfig = config.get('window')
 	const { paperURL } = config.store
 	const window = new BrowserWindow({
@@ -61,8 +55,8 @@ function createMainWindow () {
 			webSecurity: false,
 			allowDisplayingInsecureContent: true,
 			allowRunningInsecureContent: true,
-			preload: path.join(__dirname, 'browser.js')
-		}
+			preload: path.join(__dirname, 'browser.js'),
+		},
 	})
 
 	window.loadURL(paperURL)
@@ -96,7 +90,6 @@ app.on('ready', () => {
 
 		if (url.split('/').includes('present')) {
 			pageWindow.loadURL(url)
-			return
 		}
 	})
 })
@@ -112,4 +105,9 @@ app.on('before-quit', () => {
 	if (!mainWindow.isFullScreen()) {
 		config.set('window', mainWindow.getBounds())
 	}
+})
+
+// Ensure only one instance is running
+app.on('second-instance', () => {
+	app.quit()
 })

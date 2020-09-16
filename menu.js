@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 const { app, BrowserWindow, Menu, shell, dialog } = require('electron')
 const path = require('path')
 const os = require('os')
@@ -10,14 +9,14 @@ const { platform, arch, versions } = process
  * Creates an issue body text.
  * @return {String}
  */
-function getIssueBody () {
+function getIssueBody() {
 	const text = '[Replace this with your issue, but leave the table below]'
 	const table = [
 		'<table>',
 		`<tr><td>${app.getName()}</td><td>${app.getVersion()}</td></tr>`,
 		`<tr><td>Electron</td><td>${versions.electron}</td></tr>`,
 		`<tr><td>${platform} (${arch})</td><td>${os.release()}</td></tr>`,
-		'</table>'
+		'</table>',
 	].join('')
 	return `${text} \n *** \n ### System information \n ${table}`
 }
@@ -27,7 +26,7 @@ function getIssueBody () {
  * @param  {String} event
  * @return {undefined}
  */
-function sendToWebContent (event) {
+function sendToWebContent(event) {
 	const window = BrowserWindow.getAllWindows()[0]
 
 	if (platform === 'darwin') {
@@ -48,28 +47,28 @@ const menu = {
 			{
 				label: 'Preferences...',
 				accelerator: 'Cmd+,',
-				click () {
+				click() {
 					sendToWebContent('show-preferences')
-				}
+				},
 			},
 			{ type: 'separator' },
 			{
 				label: 'Log Out',
-				click () {
+				click() {
 					sendToWebContent('log-out')
-				}
+				},
 			},
 			{ type: 'separator' },
 			{
 				role: 'services',
-				submenu: []
+				submenu: [],
 			},
 			{ type: 'separator' },
 			{ role: 'hide' },
 			{ role: 'hideothers' },
 			{ type: 'separator' },
-			{ role: 'quit' }
-		]
+			{ role: 'quit' },
+		],
 	},
 	file: {
 		label: 'File',
@@ -77,33 +76,33 @@ const menu = {
 			{
 				label: 'Create new document',
 				accelerator: 'Cmd+N',
-				click () {
+				click() {
 					sendToWebContent('new-document')
-				}
+				},
 			},
 			{
 				label: 'Create meeting document',
-				click () {
+				click() {
 					sendToWebContent('meeting-document')
-				}
+				},
 			},
 			{ type: 'separator' },
 			{
 				label: 'Create new folder',
 				accelerator: 'Cmd+T',
-				click () {
+				click() {
 					sendToWebContent('new-folder')
-				}
+				},
 			},
 			{ type: 'separator' },
 			{
 				label: 'Download document',
 				accelerator: 'Cmd+D',
-				click () {
+				click() {
 					sendToWebContent('download-document')
-				}
-			}
-		]
+				},
+			},
+		],
 	},
 	edit: {
 		label: 'Edit',
@@ -117,8 +116,8 @@ const menu = {
 			{ role: 'pasteandmatchstyle' },
 			{ role: 'delete' },
 			{ type: 'separator' },
-			{ role: 'selectall' }
-		]
+			{ role: 'selectall' },
+		],
 	},
 	view: {
 		label: 'View',
@@ -128,8 +127,8 @@ const menu = {
 			{ type: 'separator' },
 			{ role: 'resetzoom' },
 			{ role: 'zoomin' },
-			{ role: 'zoomout' }
-		]
+			{ role: 'zoomout' },
+		],
 	},
 	window: {
 		label: 'Window',
@@ -138,54 +137,47 @@ const menu = {
 			{ role: 'close' },
 			{ type: 'separator' },
 			{ role: 'togglefullscreen' },
-			{ role: 'front' }
-		]
+			{ role: 'front' },
+		],
 	},
 	help: {
 		role: 'help',
 		submenu: [
 			{
 				label: `Visit ${app.getName()} website`,
-				click () {
+				click() {
 					shell.openExternal(config.get('repository'))
-				}
+				},
 			},
 			{
 				label: 'Report an issue',
-				click () {
+				click() {
 					const body = encodeURIComponent(getIssueBody())
 					shell.openExternal(`${config.get('repository')}/issues/new?body=${body}`)
-				}
-			}
-		]
+				},
+			},
+		],
 	},
 	about: {
 		role: 'about',
-		click () {
+		click() {
 			dialog.showMessageBox({
 				title: `About ${app.getName()}`,
 				message: `${app.getName()} ${app.getVersion()}`,
 				detail: 'Created by Moritz Kröger',
 				icon: path.join(__dirname, 'static/dropbox-osx.png'),
-				buttons: []
+				buttons: [],
 			})
-		}
-	}
+		},
+	},
 }
 
 if (platform === 'darwin') {
 	template.push(menu[app.getName()])
-}
-else {
-	menu.view.submenu.push(
-		{ type: 'separator' },
-		{ role: 'quit' }
-	)
+} else {
+	menu.view.submenu.push({ type: 'separator' }, { role: 'quit' })
 	// If not on macOS, add the about menu item to help.
-	menu.help.submenu.unshift(
-		menu.about,
-		{ type: 'separator' }
-	)
+	menu.help.submenu.unshift(menu.about, { type: 'separator' })
 }
 
 template.push(menu.file)

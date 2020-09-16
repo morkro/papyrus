@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 const { app, Menu, Tray, nativeImage } = require('electron')
 const path = require('path')
 const config = require('./config')
@@ -11,19 +10,19 @@ const noop = () => {}
  * @param {Function} onClick
  * @return {Tray}
  */
-function create ({ onToggle = noop(), onClick = noop() }) {
+function create({ onToggle = noop(), onClick = noop() }) {
 	if (process.platform === 'darwin') return
 	const icon = path.join(__dirname, config.get('icons.tray'))
 	const tray = new Tray(nativeImage.createFromPath(icon))
 	const contextMenu = Menu.buildFromTemplate([
 		{
 			label: 'Toggle',
-			click () {
+			click() {
 				onToggle()
-			}
+			},
 		},
 		{ type: 'separator' },
-		{ role: 'quit' }
+		{ role: 'quit' },
 	])
 
 	tray.setToolTip(app.getName())

@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 const { ipcRenderer } = require('electron')
 const os = require('os')
 
@@ -6,7 +5,7 @@ const os = require('os')
  * Checks if the dynamic user menu has been loaded already.
  * @return {Boolean}
  */
-function checkForMenuLoaded () {
+function checkForMenuLoaded() {
 	return !!document.querySelector('hp-dropdown-menu-wrapper')
 }
 /**
@@ -15,7 +14,7 @@ function checkForMenuLoaded () {
  * @param  {Function} cb
  * @return {undefined}
  */
-function forceMenuInit (cb) {
+function forceMenuInit(cb) {
 	const $sidebar = document.querySelector('.hp-sidebar-user')
 	$sidebar.click()
 	setTimeout(() => {
@@ -29,8 +28,7 @@ ipcRenderer.on('log-out', () => {
 		forceMenuInit(() => {
 			document.querySelector('.hp-menu ul[role="menu"] li:last-child button').click()
 		})
-	}
-	else {
+	} else {
 		document.querySelector('.hp-menu ul[role="menu"] li:last-child button').click()
 	}
 })
@@ -40,8 +38,7 @@ ipcRenderer.on('show-preferences', () => {
 		forceMenuInit(() => {
 			document.querySelector('.hp-button-account-settings-wrapper button').click()
 		})
-	}
-	else {
+	} else {
 		document.querySelector('.hp-button-account-settings-wrapper button').click()
 	}
 })
@@ -53,11 +50,9 @@ ipcRenderer.on('new-document', () => {
 
 	if ($docsWrapper) {
 		$docsWrapper.querySelector('.hp-actions-menu-primary-button').click()
-	}
-	else if ($folderWrapper) {
+	} else if ($folderWrapper) {
 		$folderWrapper.querySelector('.hp-actions-menu-tertiary-button').click()
-	}
-	else if ($editorPage) {
+	} else if ($editorPage) {
 		$editorPage.querySelector('.hp-create-pad-button').click()
 	}
 })
@@ -75,11 +70,12 @@ ipcRenderer.on('new-folder', () => {
 })
 
 ipcRenderer.on('download-document', () => {
-	document.querySelector('.hp-dropdown-menu-wrapper button[data-track-title="export-single"]')
+	document
+		.querySelector('.hp-dropdown-menu-wrapper button[data-track-title="export-single"]')
 		.click()
 })
 
-function init () {
+function init() {
 	if (os.platform() === 'darwin') {
 		document.body.classList.add('papyrus-drag', 'papyrus-better-header')
 	}
@@ -87,7 +83,7 @@ function init () {
 	const $homeBtn = document.querySelector('a.maestro-nav__home-button')
 
 	if ($homeBtn && $homeBtn !== null) {
-		$homeBtn.addEventListener('click', event => event.preventDefault())
+		$homeBtn.addEventListener('click', (event) => event.preventDefault())
 	}
 }
 
