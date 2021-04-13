@@ -11,7 +11,7 @@ Unofficial [Dropbox Paper](https://paper.dropbox.com) desktop application.
 ## Installation
 ### Homebrew [Cask](http://caskroom.io/)
 ```
-$ brew update && brew cask install morkro-papyrus
+$ brew update && brew install --cask morkro-papyrus
 ```
 
 ### Manually
