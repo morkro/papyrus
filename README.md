@@ -5,29 +5,34 @@
 Unofficial [Dropbox Paper](https://paper.dropbox.com) desktop application.
 
 ## Preview
+
 ![](media/papyrus-preview.png)
-*Papyrus is currently at version `1.0.2`.*
+_Papyrus is currently at version `1.0.3`._
 
 ## Installation
+
 ### Homebrew [Cask](http://caskroom.io/)
-```
-$ brew update && brew cask install morkro-papyrus
+
+```sh
+brew update && brew cask install morkro-papyrus
 ```
 
 ### Manually
+
 - [Download](https://github.com/morkro/papyrus/releases/latest) the installer
 - Unzip
 - Install the application to any location.
 
 #### macOS
+
 It's recommended to move the `Papyrus.app` file to the `Applications` directory. macOS will prompt you to **accept** that this runs from an **unidentified developer**.
 
 ## Shortcuts
 
-| Description | Keybinding |
-| :--- | :--- |
+| Description           |  Keybinding                      |
+| :-------------------- | :------------------------------- |
 | Create a new document | <kbd>Cmd/Ctrl</kbd> <kbd>N</kbd> |
-| Create a new folder | <kbd>Cmd/Ctrl</kbd> <kbd>T</kbd> |
+| Create a new folder   | <kbd>Cmd/Ctrl</kbd> <kbd>T</kbd> |
 
 All keybindings can also be found under the `File` menu.
 
@@ -37,13 +42,13 @@ The application wraps the official Dropbox Paper website in an [Electron](https:
 
 `git clone` the repository, `npm install` all dependencies and you are good to go. You might have to run `brew install wine` before building the application.
 
-| Command | Description |
-| :------ | :---------- |
-| `npm start` | Starts the application |
-| `npm run build` | Creates packages for all supported platforms _(bundles all below commands)_ |
-| `npm run build:macos` | Builds the macOS application |
-| `npm run build:windows` | Builds the Windows application |
-| `npm run build:linux` | Builds the Linux application |
+| Command                 | Description                                                                 |
+| :---------------------- | :-------------------------------------------------------------------------- |
+| `npm start`             | Starts the application                                                      |
+| `npm run build`         | Creates packages for all supported platforms _(bundles all below commands)_ |
+| `npm run build:macos`   | Builds the macOS application                                                |
+| `npm run build:windows` | Builds the Windows application                                              |
+| `npm run build:linux`   | Builds the Linux application                                                |
 
 ### Contribution
 
