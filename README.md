@@ -11,10 +11,10 @@ _Papyrus is currently at version `1.0.3`._
 
 ## Installation
 
-### Homebrew [Cask](http://caskroom.io/)
+### Homebrew Cask
 
 ```sh
-brew update && brew cask install morkro-papyrus
+brew install --cask morkro-papyrus
 ```
 
 ### Manually
