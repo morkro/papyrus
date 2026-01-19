@@ -31,9 +31,9 @@
     "build:windows": "electron-packager . --overwrite --asar --ignore='^media$' --out=dist --prune --platform=win32 --arch=ia32 --icon=static/dropbox-windows.ico --version-string.ProductName=$npm_package_productName && cd dist/Papyrus-win32-ia32 && zip -ryq9 ../Papyrus-windows-${npm_package_version}.zip *"
   },
   "devDependencies": {
-    "eslint": "^7.28.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.23.4",
+    "eslint": "^9.39.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.32.0",
     "tap-spec": "^5.0.0",
     "tape": "^5.2.2"
   },
